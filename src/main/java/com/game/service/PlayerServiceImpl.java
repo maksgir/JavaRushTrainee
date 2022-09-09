@@ -1,6 +1,5 @@
 package com.game.service;
 
-import com.game.dao.PlayerRepository;
 import com.game.entity.Player;
 import com.game.repository.PlayerDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +18,10 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public List<Player> getAllPlayers() {
         return playerDAO.getAllPlayers();
+    }
+
+    @Override
+    public Integer gatPlayerCount() {
+        return playerDAO.getPlayerCount();
     }
 }

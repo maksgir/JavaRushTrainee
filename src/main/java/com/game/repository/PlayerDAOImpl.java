@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 
@@ -29,5 +30,11 @@ public class PlayerDAOImpl implements PlayerDAO {
         }
 
         return playerList;
+    }
+
+    @Override
+    public Integer getPlayerCount() {
+        Query query = em.createQuery("SELECT COUNT(p) FROM Player p");
+        return  (int) (long) query.getSingleResult();
     }
 }

@@ -23,20 +23,20 @@ public class Player {
     @Enumerated(EnumType.STRING)
     private Profession profession;
 
-    @Column(name="experience")
-    private int experience;
-
-    @Column(name="level")
-    private int level;
-
-    @Column(name="untilNextLevel")
-    private int untilNextLevel;
-
-    @Column(name="birthday")
+    @Column(name = "birthday")
     private Date birthday;
 
-    @Column(name="banned")
+    @Column(name = "banned")
     private boolean banned;
+
+    @Column(name = "experience")
+    private int experience;
+
+    @Column(name = "level")
+    private int level;
+
+    @Column(name = "untilNextLevel")
+    private int untilNextLevel;
 
     public Player() {
     }

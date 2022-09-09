@@ -19,4 +19,9 @@ public class MyController {
     public List<Player> getAllPlayer() {
         return playerService.getAllPlayers();
     }
+
+    @GetMapping("/players/count")
+    public Integer getPlayersCount() {
+        return playerService.gatPlayerCount();
+    }
 }
