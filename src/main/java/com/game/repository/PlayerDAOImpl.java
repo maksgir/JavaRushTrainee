@@ -4,21 +4,23 @@ import com.game.entity.Player;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 
-@Repository
+@Controller
 public class PlayerDAOImpl implements PlayerDAO {
-    @Autowired
-    private EntityManagerFactory emf;
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
     public List<Player> getAllPlayers(){
-        EntityManager em = emf.createEntityManager();
+        System.out.println("nigga");
         Session session = em.unwrap(Session.class);
         List<Player> playerList = session.createQuery("from Player", Player.class).getResultList();
 

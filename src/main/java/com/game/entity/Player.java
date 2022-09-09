@@ -1,10 +1,7 @@
 package com.game.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
@@ -20,10 +17,10 @@ public class Player {
     @Column(name = "title")
     private String title;
 
-    @Column(name="race")
+    @Enumerated(EnumType.STRING)
     private Race race;
 
-    @Column(name="profession")
+    @Enumerated(EnumType.STRING)
     private Profession profession;
 
     @Column(name="experience")
