@@ -1,6 +1,7 @@
 package com.game.repository;
 
 import com.game.entity.Player;
+import com.game.exceptions.InvalidPlayerParamsException;
 import com.game.exceptions.PlayerNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -41,7 +42,10 @@ public class PlayerDAOImpl implements PlayerDAO {
     }
 
     @Override
-    public Player getPlayerById(long id) throws PlayerNotFoundException {
+    public Player getPlayerById(long id) throws PlayerNotFoundException, InvalidPlayerParamsException {
+        if (id <= 0) {
+            throw new InvalidPlayerParamsException("Id must be >0");
+        }
         Player player = em.find(Player.class, id);
         if (player == null) {
             throw new PlayerNotFoundException("Player with ID=" + id + " wasn't found");
@@ -50,7 +54,7 @@ public class PlayerDAOImpl implements PlayerDAO {
     }
 
     @Override
-    public void deletePlayer(long id) throws PlayerNotFoundException {
+    public void deletePlayer(long id) throws PlayerNotFoundException, InvalidPlayerParamsException {
         Player player = getPlayerById(id);
         em.remove(player);
     }

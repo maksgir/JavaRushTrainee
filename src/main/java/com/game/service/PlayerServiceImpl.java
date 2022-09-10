@@ -48,15 +48,12 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public Player getPlayerById(long id) throws PlayerNotFoundException {
+    public Player getPlayerById(long id) throws PlayerNotFoundException, InvalidPlayerParamsException {
         return playerDAO.getPlayerById(id);
     }
 
     @Override
     public void updatePlayer(long id, Player newPlayer) throws PlayerNotFoundException, InvalidPlayerParamsException {
-        if (id <= 0) {
-            throw new InvalidPlayerParamsException("Id must be >0");
-        }
         Player player = getPlayerById(id);
 
         updater.updateParams(player, newPlayer);
@@ -64,7 +61,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public void deletePlayer(long id) throws PlayerNotFoundException {
+    public void deletePlayer(long id) throws PlayerNotFoundException, InvalidPlayerParamsException {
         playerDAO.deletePlayer(id);
     }
 }

@@ -10,7 +10,7 @@ public interface PlayerService {
     List<Player> getAllPlayers();
     Integer gatPlayerCount();
     void savePlayer(Player player) throws InvalidPlayerParamsException;
-    Player getPlayerById(long id) throws PlayerNotFoundException;
+    Player getPlayerById(long id) throws PlayerNotFoundException, InvalidPlayerParamsException;
     void updatePlayer(long id, Player newPlayer) throws PlayerNotFoundException, InvalidPlayerParamsException;
-    void deletePlayer(long id) throws PlayerNotFoundException;
+    void deletePlayer(long id) throws PlayerNotFoundException, InvalidPlayerParamsException;
 }

@@ -33,7 +33,7 @@ public class MyController {
     }
 
     @GetMapping("players/{id}")
-    public Player getPlayerById(@PathVariable long id) throws PlayerNotFoundException {
+    public Player getPlayerById(@PathVariable long id) throws PlayerNotFoundException, InvalidPlayerParamsException {
         return playerService.getPlayerById(id);
     }
 
@@ -43,7 +43,7 @@ public class MyController {
     }
 
     @DeleteMapping("players/{id}")
-    public void deletePlayer(@PathVariable long id) throws PlayerNotFoundException {
+    public void deletePlayer(@PathVariable long id) throws PlayerNotFoundException, InvalidPlayerParamsException {
         playerService.deletePlayer(id);
     }
 
