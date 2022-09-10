@@ -20,7 +20,7 @@ public class PlayerDAOImpl implements PlayerDAO {
     private EntityManager em;
 
     @Override
-    public List<Player> getAllPlayers(){
+    public List<Player> getAllPlayers() {
         System.out.println("nigga");
         Session session = em.unwrap(Session.class);
         List<Player> playerList = session.createQuery("from Player", Player.class).getResultList();
@@ -35,6 +35,11 @@ public class PlayerDAOImpl implements PlayerDAO {
     @Override
     public Integer getPlayerCount() {
         Query query = em.createQuery("SELECT COUNT(p) FROM Player p");
-        return  (int) (long) query.getSingleResult();
+        return (int) (long) query.getSingleResult();
+    }
+
+    @Override
+    public void addPlayer(Player player) {
+        em.persist(player);
     }
 }
