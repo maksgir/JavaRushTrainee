@@ -42,6 +42,11 @@ public class MyController {
         playerService.updatePlayer(id, newPlayer);
     }
 
+    @DeleteMapping("players/{id}")
+    public void deletePlayer(@PathVariable long id) throws PlayerNotFoundException {
+        playerService.deletePlayer(id);
+    }
+
     @ExceptionHandler
     public ResponseEntity<String> handleException(Exception e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

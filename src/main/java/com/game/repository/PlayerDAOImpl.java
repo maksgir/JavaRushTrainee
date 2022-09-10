@@ -22,7 +22,6 @@ public class PlayerDAOImpl implements PlayerDAO {
 
     @Override
     public List<Player> getAllPlayers() {
-        System.out.println("nigga");
         Session session = em.unwrap(Session.class);
         List<Player> playerList = session.createQuery("from Player", Player.class).getResultList();
 
@@ -48,6 +47,12 @@ public class PlayerDAOImpl implements PlayerDAO {
             throw new PlayerNotFoundException("Player with ID=" + id + " wasn't found");
         }
         return player;
+    }
+
+    @Override
+    public void deletePlayer(long id) throws PlayerNotFoundException {
+        Player player = getPlayerById(id);
+        em.remove(player);
     }
 
 }

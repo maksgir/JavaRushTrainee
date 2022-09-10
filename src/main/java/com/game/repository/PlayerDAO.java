@@ -10,5 +10,5 @@ public interface PlayerDAO {
     Integer getPlayerCount();
     void savePlayer(Player player);
     Player getPlayerById(long id) throws PlayerNotFoundException;
-
+    void deletePlayer(long id) throws PlayerNotFoundException;
 }

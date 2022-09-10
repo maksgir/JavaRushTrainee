@@ -62,4 +62,9 @@ public class PlayerServiceImpl implements PlayerService {
         updater.updateParams(player, newPlayer);
         savePlayer(player);
     }
+
+    @Override
+    public void deletePlayer(long id) throws PlayerNotFoundException {
+        playerDAO.deletePlayer(id);
+    }
 }

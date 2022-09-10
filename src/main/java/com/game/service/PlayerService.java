@@ -12,4 +12,5 @@ public interface PlayerService {
     void savePlayer(Player player) throws InvalidPlayerParamsException;
     Player getPlayerById(long id) throws PlayerNotFoundException;
     void updatePlayer(long id, Player newPlayer) throws PlayerNotFoundException, InvalidPlayerParamsException;
+    void deletePlayer(long id) throws PlayerNotFoundException;
 }
