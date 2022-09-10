@@ -4,6 +4,8 @@ import com.game.entity.Player;
 import com.game.exceptions.InvalidPlayerParamsException;
 import org.springframework.stereotype.Component;
 
+
+//TODO add banned == null case
 @Component
 public class PlayerValidator {
     public void validatePlayer(Player player) throws InvalidPlayerParamsException {

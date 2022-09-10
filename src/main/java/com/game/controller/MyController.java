@@ -29,12 +29,17 @@ public class MyController {
 
     @PostMapping("/players")
     public void addPlayer(@RequestBody Player player) throws InvalidPlayerParamsException {
-        playerService.addPlayer(player);
+        playerService.savePlayer(player);
     }
 
     @GetMapping("players/{id}")
     public Player getPlayerById(@PathVariable long id) throws PlayerNotFoundException {
         return playerService.getPlayerById(id);
+    }
+
+    @PostMapping("players/{id}")
+    public void updatePlayerById(@PathVariable long id, @RequestBody Player newPlayer) throws PlayerNotFoundException, InvalidPlayerParamsException {
+        playerService.updatePlayer(id, newPlayer);
     }
 
     @ExceptionHandler

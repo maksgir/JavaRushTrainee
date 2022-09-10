@@ -26,10 +26,6 @@ public class PlayerDAOImpl implements PlayerDAO {
         Session session = em.unwrap(Session.class);
         List<Player> playerList = session.createQuery("from Player", Player.class).getResultList();
 
-        for (Player pl : playerList) {
-            System.out.println(pl);
-        }
-
         return playerList;
     }
 
@@ -40,8 +36,9 @@ public class PlayerDAOImpl implements PlayerDAO {
     }
 
     @Override
-    public void addPlayer(Player player) {
-        em.persist(player);
+    public void savePlayer(Player player) {
+        Session session = em.unwrap(Session.class);
+        session.saveOrUpdate(player);
     }
 
     @Override
@@ -52,4 +49,5 @@ public class PlayerDAOImpl implements PlayerDAO {
         }
         return player;
     }
+
 }

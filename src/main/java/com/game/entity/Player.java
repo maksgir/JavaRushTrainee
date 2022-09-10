@@ -30,13 +30,13 @@ public class Player {
     private boolean banned;
 
     @Column(name = "experience")
-    private int experience;
+    private Integer experience;
 
     @Column(name = "level")
-    private int level;
+    private Integer level;
 
     @Column(name = "untilNextLevel")
-    private int untilNextLevel;
+    private Integer untilNextLevel;
 
     public Player() {
     }
@@ -81,27 +81,27 @@ public class Player {
         this.profession = profession;
     }
 
-    public int getExperience() {
+    public Integer getExperience() {
         return experience;
     }
 
-    public void setExperience(int experience) {
+    public void setExperience(Integer experience) {
         this.experience = experience;
     }
 
-    public int getLevel() {
+    public Integer getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(Integer level) {
         this.level = level;
     }
 
-    public int getUntilNextLevel() {
+    public Integer getUntilNextLevel() {
         return untilNextLevel;
     }
 
-    public void setUntilNextLevel(int untilNextLevel) {
+    public void setUntilNextLevel(Integer untilNextLevel) {
         this.untilNextLevel = untilNextLevel;
     }
 

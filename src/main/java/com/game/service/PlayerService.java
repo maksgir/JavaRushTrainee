@@ -9,6 +9,7 @@ import java.util.List;
 public interface PlayerService {
     List<Player> getAllPlayers();
     Integer gatPlayerCount();
-    void addPlayer(Player player) throws InvalidPlayerParamsException;
+    void savePlayer(Player player) throws InvalidPlayerParamsException;
     Player getPlayerById(long id) throws PlayerNotFoundException;
+    void updatePlayer(long id, Player newPlayer) throws PlayerNotFoundException, InvalidPlayerParamsException;
 }

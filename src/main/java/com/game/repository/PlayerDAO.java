@@ -8,6 +8,7 @@ import java.util.List;
 public interface PlayerDAO {
     List<Player> getAllPlayers();
     Integer getPlayerCount();
-    void addPlayer(Player player);
+    void savePlayer(Player player);
     Player getPlayerById(long id) throws PlayerNotFoundException;
+
 }
