@@ -2,6 +2,7 @@ package com.game.service;
 
 import com.game.entity.Player;
 import com.game.exceptions.InvalidPlayerParamsException;
+import com.game.exceptions.PlayerNotFoundException;
 import com.game.repository.PlayerDAO;
 import com.game.util.CharacteristicCounter;
 import com.game.util.PlayerValidator;
@@ -40,5 +41,10 @@ public class PlayerServiceImpl implements PlayerService {
         chCounter.setCurrentLevel(player);
         chCounter.setUntilNextLevelExp(player);
         playerDAO.addPlayer(player);
+    }
+
+    @Override
+    public Player getPlayerById(long id) throws PlayerNotFoundException {
+        return playerDAO.getPlayerById(id);
     }
 }

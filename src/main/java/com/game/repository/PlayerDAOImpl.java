@@ -1,6 +1,7 @@
 package com.game.repository;
 
 import com.game.entity.Player;
+import com.game.exceptions.PlayerNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,14 @@ public class PlayerDAOImpl implements PlayerDAO {
     @Override
     public void addPlayer(Player player) {
         em.persist(player);
+    }
+
+    @Override
+    public Player getPlayerById(long id) throws PlayerNotFoundException {
+        Player player = em.find(Player.class, id);
+        if (player == null) {
+            throw new PlayerNotFoundException("Player with ID=" + id + " wasn't found");
+        }
+        return player;
     }
 }

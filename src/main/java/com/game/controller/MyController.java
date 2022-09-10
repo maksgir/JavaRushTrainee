@@ -2,6 +2,7 @@ package com.game.controller;
 
 import com.game.entity.Player;
 import com.game.exceptions.InvalidPlayerParamsException;
+import com.game.exceptions.PlayerNotFoundException;
 import com.game.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,10 +32,18 @@ public class MyController {
         playerService.addPlayer(player);
     }
 
-
+    @GetMapping("players/{id}")
+    public Player getPlayerById(@PathVariable long id) throws PlayerNotFoundException {
+        return playerService.getPlayerById(id);
+    }
 
     @ExceptionHandler
     public ResponseEntity<String> handleException(Exception e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<String> handleException(PlayerNotFoundException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 }
