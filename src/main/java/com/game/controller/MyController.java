@@ -49,6 +49,7 @@ public class MyController {
 
     @ExceptionHandler
     public ResponseEntity<String> handleException(Exception e) {
+        System.out.println(e.getMessage());
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
