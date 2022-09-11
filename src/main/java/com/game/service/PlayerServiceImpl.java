@@ -4,6 +4,7 @@ import com.game.entity.Player;
 import com.game.exceptions.InvalidPlayerParamsException;
 import com.game.exceptions.PlayerNotFoundException;
 import com.game.repository.PlayerDAO;
+import com.game.repository.PlayerRepository;
 import com.game.util.CharacteristicCounter;
 import com.game.util.PlayerUpdater;
 import com.game.util.PlayerValidator;
@@ -12,13 +13,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Service
 public class PlayerServiceImpl implements PlayerService {
 
     @Autowired
-    private PlayerDAO playerDAO;
+    private PlayerRepository repository;
 
     @Autowired
     private CharacteristicCounter chCounter;
@@ -31,12 +33,12 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public List<Player> getAllPlayers() {
-        return playerDAO.getAllPlayers();
+        return repository.findAll();
     }
 
     @Override
     public Integer gatPlayerCount() {
-        return playerDAO.getPlayerCount();
+        return (int) repository.count();
     }
 
     @Override
@@ -44,12 +46,19 @@ public class PlayerServiceImpl implements PlayerService {
         validator.validatePlayer(player);
         chCounter.setCurrentLevel(player);
         chCounter.setUntilNextLevelExp(player);
-        playerDAO.savePlayer(player);
+        repository.save(player);
     }
 
     @Override
     public Player getPlayerById(long id) throws PlayerNotFoundException, InvalidPlayerParamsException {
-        return playerDAO.getPlayerById(id);
+        if (id <= 0) {
+            throw new InvalidPlayerParamsException("Id must be >0");
+        }
+        Optional<Player> playerOptional = repository.findById(id);
+        if (!playerOptional.isPresent()) {
+            throw new PlayerNotFoundException("Player with ID=" + id + " wasn't found");
+        }
+        return playerOptional.get();
     }
 
     @Override
@@ -62,6 +71,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public void deletePlayer(long id) throws PlayerNotFoundException, InvalidPlayerParamsException {
-        playerDAO.deletePlayer(id);
+        Player player = getPlayerById(id);
+        repository.delete(player);
     }
 }
