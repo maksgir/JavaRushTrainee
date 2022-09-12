@@ -23,17 +23,17 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
             "(:profession is null or p.profession=:profession) and " +
             "(:banned is null or p.banned=:banned) and " +
             "((:before is null and :after is null) or " +
-            "(:before is null and p.birthday < :after) or " +
-            "(:after is null and p.birthday > :before) or " +
-            "(p.birthday > :before and p.birthday < :after)) and " +
+            "(:before is null and p.birthday >= :after) or " +
+            "(:after is null and p.birthday <= :before) or " +
+            "(p.birthday <= :before and p.birthday >= :after)) and " +
             "((:minExperience is null and :maxExperience is null) or " +
-            "(:minExperience is null and p.experience < :maxExperience) or " +
-            "(:maxExperience is null and p.experience > :minExperience) or " +
-            "(p.experience < :maxExperience and p.experience > :minExperience)) and " +
+            "(:minExperience is null and p.experience <= :maxExperience) or " +
+            "(:maxExperience is null and p.experience >= :minExperience) or " +
+            "(p.experience <= :maxExperience and p.experience >= :minExperience)) and " +
             "((:minLevel is null and :maxLevel is null) or " +
-            "(:minLevel is null and p.level < :maxLevel) or " +
-            "(:maxLevel is null and p.level > :minLevel) or " +
-            "(p.level < :maxLevel and p.level > :minLevel))"
+            "(:minLevel is null and p.level <= :maxLevel) or " +
+            "(:maxLevel is null and p.level >= :minLevel) or " +
+            "(p.level <= :maxLevel and p.level >= :minLevel))"
     )
     Page<Player> findByParams(@Param("name") String name,
                               @Param("title") String title,
@@ -55,17 +55,17 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
             "(:profession is null or p.profession=:profession) and " +
             "(:banned is null or p.banned=:banned) and " +
             "((:before is null and :after is null) or " +
-            "(:before is null and p.birthday < :after) or " +
-            "(:after is null and p.birthday > :before) or " +
-            "(p.birthday > :before and p.birthday < :after)) and " +
+            "(:before is null and p.birthday >= :after) or " +
+            "(:after is null and p.birthday <= :before) or " +
+            "(p.birthday <= :before and p.birthday >= :after)) and " +
             "((:minExperience is null and :maxExperience is null) or " +
-            "(:minExperience is null and p.experience < :maxExperience) or " +
-            "(:maxExperience is null and p.experience > :minExperience) or " +
-            "(p.experience < :maxExperience and p.experience > :minExperience)) and " +
+            "(:minExperience is null and p.experience <= :maxExperience) or " +
+            "(:maxExperience is null and p.experience >= :minExperience) or " +
+            "(p.experience <= :maxExperience and p.experience >= :minExperience)) and " +
             "((:minLevel is null and :maxLevel is null) or " +
-            "(:minLevel is null and p.level < :maxLevel) or " +
-            "(:maxLevel is null and p.level > :minLevel) or " +
-            "(p.level < :maxLevel and p.level > :minLevel))"
+            "(:minLevel is null and p.level <= :maxLevel) or " +
+            "(:maxLevel is null and p.level >= :minLevel) or " +
+            "(p.level <= :maxLevel and p.level >= :minLevel))"
     )
     Integer countByParams(@Param("name") String name,
                   @Param("title") String title,
