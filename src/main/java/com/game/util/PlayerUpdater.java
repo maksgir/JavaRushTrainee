@@ -21,7 +21,12 @@ public class PlayerUpdater {
         if (newPlayer.getBirthday() != null){
             oldPlayer.setBirthday(newPlayer.getBirthday());
         }
-        oldPlayer.setBanned(newPlayer.isBanned());
+
+        if (newPlayer.getBanned() == null){
+            oldPlayer.setBanned(false);
+        } else {
+            oldPlayer.setBanned(newPlayer.getBanned());
+        }
 
         if (newPlayer.getExperience() != null){
             oldPlayer.setExperience(newPlayer.getExperience());

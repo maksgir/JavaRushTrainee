@@ -27,7 +27,7 @@ public class Player {
     private Date birthday;
 
     @Column(name = "banned")
-    private boolean banned;
+    private Boolean banned;
 
     @Column(name = "experience")
     private Integer experience;
@@ -113,11 +113,11 @@ public class Player {
         this.birthday = birthday;
     }
 
-    public boolean isBanned() {
+    public Boolean getBanned() {
         return banned;
     }
 
-    public void setBanned(boolean banned) {
+    public void setBanned(Boolean banned) {
         this.banned = banned;
     }
 
