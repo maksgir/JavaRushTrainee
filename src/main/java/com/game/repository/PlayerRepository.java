@@ -27,7 +27,11 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
             "((:minExperience is null and :maxExperience is null) or " +
             "(:minExperience is null and p.experience < :maxExperience) or " +
             "(:maxExperience is null and p.experience > :minExperience) or " +
-            "(p.experience < :maxExperience and p.experience > :minExperience)) "
+            "(p.experience < :maxExperience and p.experience > :minExperience)) and " +
+            "((:minLevel is null and :maxLevel is null) or " +
+            "(:minLevel is null and p.level < :maxLevel) or " +
+            "(:maxLevel is null and p.level > :minLevel) or " +
+            "(p.level < :maxLevel and p.level > :minLevel))"
     )
     List<Player> findByParams(@Param("name") String name,
                               @Param("title") String title,
@@ -37,9 +41,9 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
                               @Param("before") Date before,
                               @Param("after") Date after,
                               @Param("minExperience") Integer minExperience,
-                              @Param("maxExperience") Integer maxExperience
-//                              @Param("minLevel") Integer minLevel,
-//                              @Param("maxLevel") Integer maxLevel
+                              @Param("maxExperience") Integer maxExperience,
+                              @Param("minLevel") Integer minLevel,
+                              @Param("maxLevel") Integer maxLevel
 //                              @Param("order") PlayerOrder order,
 //                              @Param("pageNumber") Integer pageNumber,
 //                              @Param("pageSize") Integer pageSize,

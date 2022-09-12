@@ -16,7 +16,9 @@ public interface PlayerService {
                               Long before,
                               Long after,
                               Integer minExperience,
-                              Integer maxExperience);
+                              Integer maxExperience,
+                              Integer minLevel,
+                              Integer maxLevel);
     Integer gatPlayerCount();
     void savePlayer(Player player) throws InvalidPlayerParamsException;
     Player getPlayerById(long id) throws PlayerNotFoundException, InvalidPlayerParamsException;

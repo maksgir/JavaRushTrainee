@@ -45,11 +45,18 @@ public class PlayerServiceImpl implements PlayerService {
                                      Long before,
                                      Long after,
                                      Integer minExperience,
-                                     Integer maxExperience) {
+                                     Integer maxExperience,
+                                     Integer minLevel,
+                                     Integer maxLevel) {
 
         java.sql.Date beforeDate = (before != null?new java.sql.Date(new java.util.Date(before).getTime()):null);
         java.sql.Date afterDate = (after != null?new java.sql.Date(new java.util.Date(after).getTime()):null);
-        return repository.findByParams(name, title, race, profession, banned, beforeDate, afterDate, minExperience, maxExperience);
+
+        return repository.findByParams(name, title,
+                race, profession, banned,
+                beforeDate, afterDate,
+                minExperience, maxExperience,
+                minLevel, maxLevel);
     }
 
     @Override
