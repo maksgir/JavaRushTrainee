@@ -12,6 +12,9 @@ import com.game.util.PlayerComparator;
 import com.game.util.PlayerUpdater;
 import com.game.util.PlayerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,7 +47,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public List<Player> findByParams(String name, String title,
+    public Page<Player> findByParams(String name, String title,
                                      Race race, Profession profession,
                                      Boolean banned,
                                      Long before,
@@ -53,23 +56,34 @@ public class PlayerServiceImpl implements PlayerService {
                                      Integer maxExperience,
                                      Integer minLevel,
                                      Integer maxLevel,
-                                     PlayerOrder order) {
+                                     Pageable pageRequest) {
 
         java.sql.Date beforeDate = (before != null ? new java.sql.Date(new java.util.Date(before).getTime()) : null);
         java.sql.Date afterDate = (after != null ? new java.sql.Date(new java.util.Date(after).getTime()) : null);
 
-        PlayerComparator comparator = new PlayerComparator(order);
 
         return repository.findByParams(name, title,
                 race, profession, banned,
                 beforeDate, afterDate,
                 minExperience, maxExperience,
-                minLevel, maxLevel).stream().sorted(comparator).collect(Collectors.toList());
+                minLevel, maxLevel, pageRequest);
     }
 
     @Override
-    public Integer gatPlayerCount() {
-        return (int) repository.count();
+    public Integer gatPlayerCount(String name, String title,
+                                  Race race, Profession profession, Boolean banned,
+                                  Long before, Long after,
+                                  Integer minExperience, Integer maxExperience,
+                                  Integer minLevel, Integer maxLevel) {
+
+        java.sql.Date beforeDate = (before != null ? new java.sql.Date(new java.util.Date(before).getTime()) : null);
+        java.sql.Date afterDate = (after != null ? new java.sql.Date(new java.util.Date(after).getTime()) : null);
+
+        return repository.countByParams(name, title,
+                race, profession, banned,
+                beforeDate, afterDate,
+                minExperience, maxExperience,
+                minLevel, maxLevel);
     }
 
     @Override
