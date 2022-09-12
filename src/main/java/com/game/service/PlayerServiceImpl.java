@@ -43,11 +43,13 @@ public class PlayerServiceImpl implements PlayerService {
                                      Race race, Profession profession,
                                      Boolean banned,
                                      Long before,
-                                     Long after) {
+                                     Long after,
+                                     Integer minExperience,
+                                     Integer maxExperience) {
 
         java.sql.Date beforeDate = (before != null?new java.sql.Date(new java.util.Date(before).getTime()):null);
         java.sql.Date afterDate = (after != null?new java.sql.Date(new java.util.Date(after).getTime()):null);
-        return repository.findByParams(name, title, race, profession, banned, beforeDate, afterDate);
+        return repository.findByParams(name, title, race, profession, banned, beforeDate, afterDate, minExperience, maxExperience);
     }
 
     @Override

@@ -14,7 +14,9 @@ public interface PlayerService {
                               Race race, Profession profession,
                               Boolean banned,
                               Long before,
-                              Long after);
+                              Long after,
+                              Integer minExperience,
+                              Integer maxExperience);
     Integer gatPlayerCount();
     void savePlayer(Player player) throws InvalidPlayerParamsException;
     Player getPlayerById(long id) throws PlayerNotFoundException, InvalidPlayerParamsException;

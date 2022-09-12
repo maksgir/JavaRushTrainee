@@ -28,9 +28,11 @@ public class MyController {
                                      @RequestParam(value = "profession", required = false) Profession profession,
                                      @RequestParam(value = "banned", required = false) Boolean banned,
                                      @RequestParam(value = "after", required = false) Long after,
-                                     @RequestParam(value = "before", required = false) Long before) {
+                                     @RequestParam(value = "before", required = false) Long before,
+                                     @RequestParam(value = "minExperience", required = false) Integer minExperience,
+                                     @RequestParam(value = "maxExperience", required = false) Integer maxExperience) {
 
-        return playerService.findByParams(name, title, race, profession, banned, before, after);
+        return playerService.findByParams(name, title, race, profession, banned, before, after, minExperience, maxExperience);
     }
 
     @GetMapping("/players/count")
