@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -25,8 +26,11 @@ public class MyController {
                                      @RequestParam(value = "title", required = false) String title,
                                      @RequestParam(value = "race", required = false) Race race,
                                      @RequestParam(value = "profession", required = false) Profession profession,
-                                     @RequestParam(value = "banned", required = false) Boolean banned) {
-        return playerService.findByParams(name, title, race, profession, banned);
+                                     @RequestParam(value = "banned", required = false) Boolean banned,
+                                     @RequestParam(value = "after", required = false) Long after,
+                                     @RequestParam(value = "before", required = false) Long before) {
+
+        return playerService.findByParams(name, title, race, profession, banned, before, after);
     }
 
     @GetMapping("/players/count")
@@ -57,6 +61,7 @@ public class MyController {
     @ExceptionHandler
     public ResponseEntity<String> handleException(Exception e) {
         System.out.println(e.getMessage());
+        e.printStackTrace();
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 

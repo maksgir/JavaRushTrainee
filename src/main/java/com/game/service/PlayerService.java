@@ -12,7 +12,9 @@ public interface PlayerService {
     List<Player> getAllPlayers();
     List<Player> findByParams(String name, String title,
                               Race race, Profession profession,
-                              Boolean banned);
+                              Boolean banned,
+                              Long before,
+                              Long after);
     Integer gatPlayerCount();
     void savePlayer(Player player) throws InvalidPlayerParamsException;
     Player getPlayerById(long id) throws PlayerNotFoundException, InvalidPlayerParamsException;

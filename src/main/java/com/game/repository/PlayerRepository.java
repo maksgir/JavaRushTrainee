@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface PlayerRepository extends JpaRepository<Player, Long> {
@@ -18,15 +19,20 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
             "(:title is null or (p.title) like (concat('%', :title,'%'))) and" +
             "(:race is null or p.race=:race) and " +
             "(:profession is null or p.profession=:profession) and " +
-            "(:banned is null or p.banned=:banned)"
+            "(:banned is null or p.banned=:banned) and " +
+            "(:before is null and :after is null) or " +
+            "(:before is null and p.birthday < :after) or " +
+            "(:after is null and p.birthday > :before) or " +
+            "(p.birthday > :before and p.birthday < :after)"
     )
     List<Player> findByParams(@Param("name") String name,
                               @Param("title") String title,
                               @Param("race") Race race,
                               @Param("profession") Profession profession,
-                              @Param("banned") Boolean banned
-//                              @Param("after") Long after,
-//                              @Param("before") Long before,
+                              @Param("banned") Boolean banned,
+                              @Param("before") Date before,
+                              @Param("after") Date after
+
 //                              @Param("minExperience") Integer minExperience,
 //                              @Param("maxExperience") Integer maxExperience,
 //                              @Param("minLevel") Integer minLevel,

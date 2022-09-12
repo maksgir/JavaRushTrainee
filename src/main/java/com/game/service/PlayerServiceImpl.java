@@ -5,7 +5,6 @@ import com.game.entity.Profession;
 import com.game.entity.Race;
 import com.game.exceptions.InvalidPlayerParamsException;
 import com.game.exceptions.PlayerNotFoundException;
-import com.game.repository.PlayerDAO;
 import com.game.repository.PlayerRepository;
 import com.game.util.CharacteristicCounter;
 import com.game.util.PlayerUpdater;
@@ -14,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,8 +41,13 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public List<Player> findByParams(String name, String title,
                                      Race race, Profession profession,
-                                     Boolean banned) {
-        return repository.findByParams(name, title, race, profession, banned);
+                                     Boolean banned,
+                                     Long before,
+                                     Long after) {
+
+        java.sql.Date beforeDate = (before != null?new java.sql.Date(new java.util.Date(before).getTime()):null);
+        java.sql.Date afterDate = (after != null?new java.sql.Date(new java.util.Date(after).getTime()):null);
+        return repository.findByParams(name, title, race, profession, banned, beforeDate, afterDate);
     }
 
     @Override
