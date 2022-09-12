@@ -1,10 +1,12 @@
 package com.game.service;
 
+import com.game.controller.PlayerOrder;
 import com.game.entity.Player;
 import com.game.entity.Profession;
 import com.game.entity.Race;
 import com.game.exceptions.InvalidPlayerParamsException;
 import com.game.exceptions.PlayerNotFoundException;
+import com.game.util.PlayerComparator;
 
 import java.util.List;
 
@@ -18,7 +20,8 @@ public interface PlayerService {
                               Integer minExperience,
                               Integer maxExperience,
                               Integer minLevel,
-                              Integer maxLevel);
+                              Integer maxLevel,
+                              PlayerOrder order);
     Integer gatPlayerCount();
     void savePlayer(Player player) throws InvalidPlayerParamsException;
     Player getPlayerById(long id) throws PlayerNotFoundException, InvalidPlayerParamsException;

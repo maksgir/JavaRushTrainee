@@ -32,13 +32,14 @@ public class MyController {
                                      @RequestParam(value = "minExperience", required = false) Integer minExperience,
                                      @RequestParam(value = "maxExperience", required = false) Integer maxExperience,
                                      @RequestParam(value = "minLevel", required = false) Integer minLevel,
-                                     @RequestParam(value = "maxLevel", required = false) Integer maxLevel) {
+                                     @RequestParam(value = "maxLevel", required = false) Integer maxLevel,
+                                     @RequestParam(value = "order", required = false) PlayerOrder order) {
 
         return playerService.findByParams(name, title,
                 race, profession, banned,
                 before, after,
                 minExperience, maxExperience,
-                minLevel, maxLevel);
+                minLevel, maxLevel, order);
     }
 
     @GetMapping("/players/count")

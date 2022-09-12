@@ -1,5 +1,6 @@
 package com.game.service;
 
+import com.game.controller.PlayerOrder;
 import com.game.entity.Player;
 import com.game.entity.Profession;
 import com.game.entity.Race;
@@ -7,6 +8,7 @@ import com.game.exceptions.InvalidPlayerParamsException;
 import com.game.exceptions.PlayerNotFoundException;
 import com.game.repository.PlayerRepository;
 import com.game.util.CharacteristicCounter;
+import com.game.util.PlayerComparator;
 import com.game.util.PlayerUpdater;
 import com.game.util.PlayerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Transactional
 @Service
@@ -33,6 +37,7 @@ public class PlayerServiceImpl implements PlayerService {
     @Autowired
     private PlayerUpdater updater;
 
+
     @Override
     public List<Player> getAllPlayers() {
         return repository.findAll();
@@ -47,16 +52,19 @@ public class PlayerServiceImpl implements PlayerService {
                                      Integer minExperience,
                                      Integer maxExperience,
                                      Integer minLevel,
-                                     Integer maxLevel) {
+                                     Integer maxLevel,
+                                     PlayerOrder order) {
 
-        java.sql.Date beforeDate = (before != null?new java.sql.Date(new java.util.Date(before).getTime()):null);
-        java.sql.Date afterDate = (after != null?new java.sql.Date(new java.util.Date(after).getTime()):null);
+        java.sql.Date beforeDate = (before != null ? new java.sql.Date(new java.util.Date(before).getTime()) : null);
+        java.sql.Date afterDate = (after != null ? new java.sql.Date(new java.util.Date(after).getTime()) : null);
+
+        PlayerComparator comparator = new PlayerComparator(order);
 
         return repository.findByParams(name, title,
                 race, profession, banned,
                 beforeDate, afterDate,
                 minExperience, maxExperience,
-                minLevel, maxLevel);
+                minLevel, maxLevel).stream().sorted(comparator).collect(Collectors.toList());
     }
 
     @Override
