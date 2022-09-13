@@ -87,11 +87,11 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public void savePlayer(Player player) throws InvalidPlayerParamsException {
+    public Player savePlayer(Player player) throws InvalidPlayerParamsException {
         validator.validatePlayer(player);
         chCounter.setCurrentLevel(player);
         chCounter.setUntilNextLevelExp(player);
-        repository.save(player);
+        return repository.save(player);
     }
 
     @Override
@@ -107,11 +107,11 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public void updatePlayer(long id, Player newPlayer) throws PlayerNotFoundException, InvalidPlayerParamsException {
+        public Player updatePlayer(long id, Player newPlayer) throws PlayerNotFoundException, InvalidPlayerParamsException {
         Player player = getPlayerById(id);
 
         updater.updateParams(player, newPlayer);
-        savePlayer(player);
+        return savePlayer(player);
     }
 
     @Override

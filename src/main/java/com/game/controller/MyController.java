@@ -80,8 +80,8 @@ public class MyController {
     }
 
     @PostMapping("/players")
-    public void addPlayer(@RequestBody Player player) throws InvalidPlayerParamsException {
-        playerService.savePlayer(player);
+    public Player addPlayer(@RequestBody Player player) throws InvalidPlayerParamsException {
+        return playerService.savePlayer(player);
     }
 
     @GetMapping("players/{id}")
@@ -90,8 +90,8 @@ public class MyController {
     }
 
     @PostMapping("players/{id}")
-    public void updatePlayerById(@PathVariable long id, @RequestBody Player newPlayer) throws PlayerNotFoundException, InvalidPlayerParamsException {
-        playerService.updatePlayer(id, newPlayer);
+    public Player updatePlayerById(@PathVariable long id, @RequestBody Player newPlayer) throws PlayerNotFoundException, InvalidPlayerParamsException {
+        return playerService.updatePlayer(id, newPlayer);
     }
 
     @DeleteMapping("players/{id}")

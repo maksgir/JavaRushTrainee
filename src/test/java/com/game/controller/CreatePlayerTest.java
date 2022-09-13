@@ -67,11 +67,13 @@ public class CreatePlayerTest extends AbstractTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(TestsHelper.BANNED_TRUE_JSON))
                 .andExpect(status().isOk());
-
+        System.out.println(resultActions.andReturn().getResponse());
         PlayerInfoTest expected = new PlayerInfoTest(41L, "Амарылис", "Прозелит",
                 Race.DWARF, Profession.CLERIC, 988059600000L, true, 63986, 35, 2614);
         String contentAsString = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println(contentAsString);
         PlayerInfoTest actual = new ObjectMapper().readValue(contentAsString, PlayerInfoTest.class);
+//        System.out.println(actual);
         assertEquals("Возвращается не правильный результат при запросе создания игрока.", expected, actual);
     }
 }

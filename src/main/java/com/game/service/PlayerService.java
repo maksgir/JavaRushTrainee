@@ -30,8 +30,8 @@ public interface PlayerService {
                            Long before, Long after,
                            Integer minExperience, Integer maxExperience,
                            Integer minLevel, Integer maxLevel);
-    void savePlayer(Player player) throws InvalidPlayerParamsException;
+    Player savePlayer(Player player) throws InvalidPlayerParamsException;
     Player getPlayerById(long id) throws PlayerNotFoundException, InvalidPlayerParamsException;
-    void updatePlayer(long id, Player newPlayer) throws PlayerNotFoundException, InvalidPlayerParamsException;
+    Player updatePlayer(long id, Player newPlayer) throws PlayerNotFoundException, InvalidPlayerParamsException;
     void deletePlayer(long id) throws PlayerNotFoundException, InvalidPlayerParamsException;
 }
